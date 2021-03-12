@@ -14,14 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/', function () {
-    return view('admin.layouts.app');
+//Route::get('/home', 'HomeController@index')->name('home');
 
-})->name('dashboard');
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/planets', 'PlanetsController')
-    ->names('planet');
 
-Route::resource('/starships', 'StarshipsController')
-    ->names('starship');
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/', function () {
+        return view('admin.layouts.app');
+
+    })->name('dashboard');
+    Route::resource('/planets', 'PlanetsController')
+        ->names('planet');
+
+    Route::resource('/starships', 'StarshipsController')
+        ->names('starship');
+});

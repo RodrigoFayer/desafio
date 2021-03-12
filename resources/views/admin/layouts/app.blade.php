@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Star Wars | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -40,7 +40,7 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content">
         <div class="container-fluid">
@@ -57,11 +57,11 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-<script src="{{ asset('js/app.js') }}"></script>  
+<script src="{{ asset('js/app.js') }}"></script>
 <script>
   var errors = {!! $errors !!}
 </script>
 <script src="{{ asset('js/components/error.js')  }}"></script>
-@stack('scripts')  
+@stack('scripts')
 </body>
 </html>
