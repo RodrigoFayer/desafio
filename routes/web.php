@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', function () {
     return view('admin.layouts.app');
-    
+
 })->name('dashboard');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('/planets', 'PlanetsController')
+    ->names('planet');
+
+Route::resource('/starships', 'StarshipsController')
+    ->names('starship');

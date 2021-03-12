@@ -4,7 +4,11 @@
             <h3 class="card-title title-form">{{ $title ?? null }} </h3>
         </div>
         <div class="card-body">
-            {{ $content ?? null }}
+            <form id="form-adicionar" action="{{ $url ?? '/' }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                {{ $form ?? null }}
+            </form>
         </div>
         <div class="card-footer">
             {{ $back ?? null }}
