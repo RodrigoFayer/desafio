@@ -15,11 +15,18 @@ class PlanetsController extends Controller
      */
     public function index()
     {
+        $planets =[];
         $client = new Client();
-        $url = "https://swapi.dev/api/planets/";
-        $responseJson = $client->request('GET', $url)->getBody();
-        $responseObj = json_decode($responseJson);
-        $planets = $responseObj->results;
+        for($i=1;$i<5;$i++){
+
+            $url = "https://swapi.dev/api/planets/?page={$i}";
+            $responseJson = $client->request('GET', $url)->getBody();
+            $responseObj = json_decode($responseJson);
+            foreach($responseObj->results as $planet){
+                array_push($planets,$planet);
+            }
+
+        }
 
         return view('admin.planets.index',compact('planets'));
 
