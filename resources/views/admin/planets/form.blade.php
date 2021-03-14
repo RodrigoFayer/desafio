@@ -48,6 +48,8 @@
         <label for="residents" class="required">Residentes </label>
         @if ($planet->residents == [])
             <p>Esse planeta não tem residentes !!</p>
+            <input name="residents[]" required id="residents" type="hidden">
+
         @else
             @foreach($planet->residents as $resident)
             <input name="residents[]" required id="residents" value="{{ old('residents', $resident) }}" type="hidden">

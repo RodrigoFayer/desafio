@@ -10,4 +10,8 @@ class Films extends Model
     {
         return $this->belongsToMany('App\Planets', 'planets_films');
     }
+    public function starships()
+    {
+        return $this->belongsToMany('App\Starships','starships_people');
+    }
 }

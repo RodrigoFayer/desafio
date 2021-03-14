@@ -3,12 +3,8 @@
 @section('content')
     @component('admin.components.show')
         @slot('title', 'Mostrar Nave ' . $starship->name)
-        @slot('url', route('starship.store'))
         @slot('form')
-            @include('admin.starships.form')
-        @endslot
-        @slot('back')
-            <button type="submit" form="form-adicionar" class="btn btn-primary float-right">Salvar</button>
+            @include('admin.save.starships.form')
         @endslot
     @endcomponent
 @endsection

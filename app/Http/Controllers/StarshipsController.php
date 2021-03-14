@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Starships;
+use App\Films;
+use App\People;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
-use App\DataTables\UsersDataTable;
+
 
 
 class StarshipsController extends Controller
@@ -37,12 +36,6 @@ class StarshipsController extends Controller
         return view('admin.starships.index', compact('starships'));
     }
 
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +50,25 @@ class StarshipsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $films = [];
+        $pilots = [];
+        if($request->films!=null){
+            foreach(Films::whereIn('url',$request->films)->get() as $urlFilm){
+                array_push($films,$urlFilm->id);
+            }
+        }
+        if($request->pilots!=null){
+            foreach(People::whereIn('url',$request->pilots)->get() as $urlPeople){
+                array_push($pilots,$urlPeople->id);
+            }
+        }
+        $starship = Starships::create($request->except('films','pilots'));
+        $starship->films()->attach($films);
+        $starship->people()->attach($pilots);
+
+        return redirect()->route('starship.index')->with('success', true);
+
+
     }
 
     /**

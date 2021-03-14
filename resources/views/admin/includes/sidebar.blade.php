@@ -62,7 +62,7 @@
             </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="/starships" class="nav-link {{ Route::is('starship.index') ? 'active' : '' }}">
+                    <a href="{{ route('savesStarships.index') }}" class="nav-link {{ Route::is('savesStarships.index') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-space-shuttle"></i>
                         <p>
                             Naves

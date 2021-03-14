@@ -10,4 +10,8 @@ class People extends Model
     {
         return $this->belongsToMany('App\Planets', 'planets_people');
     }
+    public function starships()
+    {
+        return $this->belongsToMany('App\Starships','starships_people');
+    }
 }

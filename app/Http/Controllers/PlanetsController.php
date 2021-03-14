@@ -47,14 +47,17 @@ class PlanetsController extends Controller
      */
     public function store(Request $request)
     {
-        $residents = $request->residents;
         $films = [];
         $residents = [];
-        foreach(Films::whereIn('url',$request->films)->get() as $urlFilm){
-            array_push($films,$urlFilm->id);
+        if($request->films!=null){
+            foreach(Films::whereIn('url',$request->films)->get() as $urlFilm){
+                array_push($films,$urlFilm->id);
+            }
         }
-        foreach(People::whereIn('url',$request->residents)->get() as $urlPeople){
-            array_push($residents,$urlPeople->id);
+        if($request->residents!=null){
+            foreach(People::whereIn('url',$request->residents)->get() as $urlPeople){
+                array_push($residents,$urlPeople->id);
+            }
         }
         $planet = Planets::create($request->except('films','residents'));
         $planet->films()->attach($films);
