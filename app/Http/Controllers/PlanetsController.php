@@ -63,7 +63,7 @@ class PlanetsController extends Controller
         $planet->films()->attach($films);
         $planet->people()->attach($residents);
 
-        return redirect()->route('planet.index')->with('success', true);
+        return redirect()->route('savesPlanets.index')->with('success', true);
     }
 
     /**

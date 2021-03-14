@@ -66,7 +66,7 @@ class StarshipsController extends Controller
         $starship->films()->attach($films);
         $starship->people()->attach($pilots);
 
-        return redirect()->route('starship.index')->with('success', true);
+        return redirect()->route('savesStarships.index')->with('success', true);
 
 
     }

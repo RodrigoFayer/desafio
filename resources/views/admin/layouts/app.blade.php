@@ -48,6 +48,7 @@
         </div>
     </div>
 </div>
+  @include('admin.includes.success')
   @include('admin.includes.footer')
 
   <!-- Control Sidebar -->
