@@ -70,7 +70,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="/planets" class="nav-link {{ Route::is('planet.index') ? 'active' : '' }}">
+                    <a href="{{ route('savesPlanets.index') }}" class="nav-link {{ Route::is('savesPlanets.index') ? 'active' : '' }}">
                         <i class="nav-icon fab fa-galactic-republic"></i>
                         <p>
                             Planetas

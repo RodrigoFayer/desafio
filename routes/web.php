@@ -30,4 +30,6 @@ Route::middleware('auth')->group(function(){
 
     Route::resource('/starships', 'StarshipsController')
         ->names('starship');
+    Route::resource('/save/planets', 'PlanetSaveController')
+        ->names('savesPlanets');
 });

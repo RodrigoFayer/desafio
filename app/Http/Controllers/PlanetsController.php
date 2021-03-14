@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Planets;
+use App\Films;
+use App\People;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
@@ -45,7 +47,20 @@ class PlanetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $residents = $request->residents;
+        $films = [];
+        $residents = [];
+        foreach(Films::whereIn('url',$request->films)->get() as $urlFilm){
+            array_push($films,$urlFilm->id);
+        }
+        foreach(People::whereIn('url',$request->residents)->get() as $urlPeople){
+            array_push($residents,$urlPeople->id);
+        }
+        $planet = Planets::create($request->except('films','residents'));
+        $planet->films()->attach($films);
+        $planet->people()->attach($residents);
+
+        return redirect()->route('planet.index')->with('success', true);
     }
 
     /**
@@ -61,6 +76,7 @@ class PlanetsController extends Controller
         $responseJson = $client->request('GET', $url)->getBody();
         $responseObj = json_decode($responseJson);
         $planet = $responseObj;
+
 
 
         return view('admin.planets.show',compact('planet'));

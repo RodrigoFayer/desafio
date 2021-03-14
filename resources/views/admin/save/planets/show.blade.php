@@ -3,9 +3,9 @@
 @section('content')
     @component('admin.components.show')
         @slot('title', 'Mostrar Planeta ' . $planet->name)
-        @slot('url', route('planet.store'))
+        @slot('url', "".Str::substr($planet->url, 31))
         @slot('form')
-            @include('admin.planets.form')
+            @include('admin.save.planets.form')
         @endslot
     @endcomponent
 @endsection
