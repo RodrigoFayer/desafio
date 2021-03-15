@@ -7,6 +7,7 @@ use App\Films;
 use App\People;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Http\Requests\PlanetRequest;
 
 class PlanetsController extends Controller
 {
@@ -45,7 +46,7 @@ class PlanetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PlanetRequest $request)
     {
         $films = [];
         $residents = [];

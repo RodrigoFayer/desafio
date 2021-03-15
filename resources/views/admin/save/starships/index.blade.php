@@ -2,7 +2,7 @@
 
 @section('content')
     @component('admin.components.table')
-        @slot('titulo', 'Naves')
+        @slot('titulo', 'Naves Salvas')
         @slot('head')
             <th>Nome</th>
             <th>Preço</th>

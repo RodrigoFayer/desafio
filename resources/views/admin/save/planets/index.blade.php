@@ -2,7 +2,7 @@
 
 @section('content')
     @component('admin.components.table')
-        @slot('titulo', 'Planetas')
+        @slot('titulo', 'Planetas Salvos')
         @slot('head')
             <th>Nome</th>
             <th>Clima</th>

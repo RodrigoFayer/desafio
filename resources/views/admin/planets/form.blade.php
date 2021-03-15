@@ -1,3 +1,18 @@
+@if ($errors->any())
+    @push('scripts')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Planeta já salvo!',
+                html:
+                    ''+
+                    '<a class="btn btn-primary" href="{{ route('planet.index')}}">Voltar para planetas</a>',
+                showConfirmButton: false,
+            })
+        </script>
+    @endpush
+@endif
 <div class="row">
     <div class="col-lg-6 col-md-12 form-group">
         <label for="name" class="required">Nome </label>
@@ -35,27 +50,32 @@
         <input name="terrain" required id="terrain" value="{{ old('terrain', $planet->terrain) }}" type="text" class="form-control">
     </div>
     <div class="col-lg-6 col-md-12 form-group">
-        <label for="surface_water" class="required">Agua </label>
+        <label for="surface_water" class="required">Água </label>
         <input name="surface_water" required id="surface_water" value="{{ old('surface_water', $planet->surface_water) }}" type="hidden">
         <input name="surface_water" required id="surface_water" value="{{ old('surface_water', $planet->surface_water) }}" type="text" class="form-control">
     </div>
-    <div class="col-lg-12 col-md-12 form-group">
+    <div class="col-lg-6 col-md-12 form-group">
         <label for="population" class="required">População </label>
         <input name="population" required id="population" value="{{ old('population', $planet->population) }}" type="hidden">
         <input name="population" required id="population" value="{{ old('population', $planet->population) }}" type="text" class="form-control">
     </div>
     <div class="col-lg-6 col-md-12 form-group">
+        <label for="url" class="required">Url </label>
+        <input name="url" required id="url" value="{{ old('url', $planet->url) }}" type="hidden">
+        <input name="url" required id="url" value="{{ old('url', $planet->url) }}" type="text" class="form-control">
+    </div>
+    <div class="col-lg-6 col-md-12 form-group">
         <label for="residents" class="required">Residentes </label>
         @if ($planet->residents == [])
             <p>Esse planeta não tem residentes !!</p>
-            <input name="residents[]" required id="residents" type="hidden">
+            <input name="residents[]" id="residents" type="hidden">
 
         @else
             @foreach($planet->residents as $resident)
-            <input name="residents[]" required id="residents" value="{{ old('residents', $resident) }}" type="hidden">
+            <input name="residents[]" id="residents" value="{{ $resident }}" type="hidden">
 
             @endforeach
-            <select multiple name="residents[]" required id="residents" class="form-control">
+            <select multiple name="residents[]" id="residents" class="form-control">
 
                 @foreach($planet->residents as $resident)
                     <option>
@@ -69,11 +89,12 @@
         <label for="films" class="required">Filmes </label>
         @if ($planet->films == [])
             <p>Esse planeta não aparece em nehum filme !!</p>
+            <input name="films[]" id="films" type="hidden">
         @else
             @foreach($planet->films as $film)
-                <input name="films[]" required id="films" value="{{ old('films', $film) }}" type="hidden">
+                <input name="films[]" id="films" value="{{ $film }}" type="hidden">
             @endforeach
-            <select multiple name="films[]" required id="films" class="form-control">
+            <select multiple name="films[]"  id="films" class="form-control">
                 @foreach($planet->films as $film)
                     <option>
                         {{ $film }}
@@ -82,7 +103,6 @@
             </select>
         @endif
     </div>
-    <input name="url" required id="url" value="{{ old('url', $planet->url) }}" type="hidden">
 
 
 </div>

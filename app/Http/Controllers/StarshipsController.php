@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Starships;
 use App\Films;
 use App\People;
-use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Http\Requests\StarshipRequest;
 
 
 
@@ -48,7 +48,7 @@ class StarshipsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StarshipRequest $request)
     {
         $films = [];
         $pilots = [];

@@ -1,3 +1,18 @@
+@if ($errors->any())
+    @push('scripts')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Nave já salvo!',
+                html:
+                    ''+
+                    '<a class="btn btn-primary" href="{{ route('starship.index')}}">Voltar para Naves</a>',
+                showConfirmButton: false,
+            })
+        </script>
+    @endpush
+@endif
 <div class="row">
     <div class="col-lg-6 col-md-12 form-group">
         <label for="name" class="required">Nome </label>
@@ -59,10 +74,15 @@
         <input name="MGLT" required id="MGLT" value="{{ old('MGLT', $starship->MGLT) }}" type="hidden">
         <input name="MGLT" required id="MGLT" value="{{ old('MGLT', $starship->MGLT) }}" type="text" class="form-control">
     </div>
-    <div class="col-lg-12 col-md-12 form-group">
+    <div class="col-lg-6 col-md-12 form-group">
         <label for="starship_class" class="required">Classe </label>
         <input name="starship_class" required id="starship_class" value="{{ old('starship_class', $starship->starship_class) }}" type="hidden">
         <input name="starship_class" required id="starship_class" value="{{ old('starship_class', $starship->starship_class) }}" type="text" class="form-control">
+    </div>
+    <div class="col-lg-6 col-md-12 form-group">
+        <label for="url" class="required">URl </label>
+        <input name="url" required id="url" value="{{ old('url', $starship->url) }}" type="hidden">
+        <input name="url" required id="url" value="{{ old('url', $starship->url) }}" type="text" class="form-control">
     </div>
     <div class="col-lg-6 col-md-12 form-group">
         <label for="pilots" class="required">Pilotos </label>
@@ -71,7 +91,7 @@
             <input name="pilots[]" required id="pilots" type="hidden">
         @else
             @foreach($starship->pilots as $pilot)
-                <input name="pilots[]" required id="pilots" value="{{ old('pilots', $pilot) }}" type="hidden">
+                <input name="pilots[]" required id="pilots" value="{{$pilot}}" type="hidden">
             @endforeach
             <select multiple name="pilots[]" required id="pilots" class="form-control">
 
@@ -87,10 +107,10 @@
         <label for="films" class="required">Filmes </label>
         @if ($starship->films == [])
             <p>Essa nave não aparece em nehum filme !!</p>
-            <input name="films[]" required id="films" value="{{ old('films', $film) }}" type="hidden">
+            <input name="films[]" required id="films" type="hidden">
         @else
             @foreach($starship->films as $film)
-                <input name="films[]" required id="films" value="{{ old('films', $film) }}" type="hidden">
+                <input name="films[]" required id="films" value="{{ $film }}" type="hidden">
 
             @endforeach
             <select multiple name="films[]" required id="films" class="form-control">
@@ -103,6 +123,5 @@
             </select>
         @endif
     </div>
-    <input name="url" required id="url" value="{{ old('url', $starship->url) }}" type="hidden">
 
 </div>
