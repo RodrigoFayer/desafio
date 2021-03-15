@@ -21,10 +21,7 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/', function () {
-        return view('admin.layouts.app');
-
-    })->name('dashboard');
+    Route::get('/','DashboardController@index')->name('dashboard');
     Route::resource('/planets', 'PlanetsController')
         ->names('planet');
 
