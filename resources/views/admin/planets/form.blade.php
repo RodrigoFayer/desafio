@@ -103,6 +103,8 @@
             </select>
         @endif
     </div>
+    <input name="user_id" required id="user_id" value="{{ $user_id }}" type="hidden">
+
 
 
 </div>

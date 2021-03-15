@@ -29,6 +29,9 @@ class CreateStarshipsTable extends Migration
             $table->string('MGLT');
             $table->string('starship_class');
             $table->string('url');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

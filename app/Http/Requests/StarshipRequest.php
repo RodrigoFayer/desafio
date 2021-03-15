@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class StarshipRequest extends FormRequest
 {
     /**
@@ -24,7 +24,12 @@ class StarshipRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:starships',
+            'name' => [
+                'required',
+                Rule::unique('starships')
+                    ->where('user_id', $this->user_id)
+
+            ],
             'model' => 'required',
             'manufacturer' => 'required',
             'cost_in_credits' => 'required',
@@ -37,7 +42,13 @@ class StarshipRequest extends FormRequest
             'hyperdrive_rating' => 'required',
             'MGLT' => 'required',
             'starship_class' => 'required',
-            'url' => 'required|unique:starships',
+            'url' => [
+                'required',
+                Rule::unique('starships')
+                    ->where('user_id', $this->user_id)
+
+            ],
+
         ];
     }
     public function attributes()

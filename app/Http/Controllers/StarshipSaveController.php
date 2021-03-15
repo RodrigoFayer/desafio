@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Starships;
 use App\Films;
 use App\People;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class StarshipSaveController extends Controller
 {
     public function index()
     {
-        $starships = Starships::all();
+        $starships = Auth::user()->starship;
         return view('admin.save.starships.index',compact('starships'));
     }
 

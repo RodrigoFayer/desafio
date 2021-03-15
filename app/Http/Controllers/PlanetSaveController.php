@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\Planets;
 use App\Films;
 use App\People;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+
 
 class PlanetSaveController extends Controller
 {
     public function index()
     {
-        $planets = Planets::all();
+        $planets = Auth::user()->planets;
         return view('admin.save.planets.index',compact('planets'));
     }
     public function show(Planets $planet){

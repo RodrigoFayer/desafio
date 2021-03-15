@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Starships;
 use App\Planets;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $planets = Planets::all();
-        $starships = Starships::all();
+        $planets = Auth::user()->planets;
+        $starships = Auth::user()->starship;
         $planets = count($planets);
         $starships = count($starships);
 

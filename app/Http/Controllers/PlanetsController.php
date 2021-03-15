@@ -8,6 +8,8 @@ use App\People;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Requests\PlanetRequest;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class PlanetsController extends Controller
 {
@@ -60,9 +62,11 @@ class PlanetsController extends Controller
                 array_push($residents,$urlPeople->id);
             }
         }
-        $planet = Planets::create($request->except('films','residents'));
+        $planet = $request->except('films','residents');
+        $planet = Planets::create($planet);
         $planet->films()->attach($films);
         $planet->people()->attach($residents);
+
 
         return redirect()->route('savesPlanets.index')->with('success', true);
     }
@@ -80,10 +84,11 @@ class PlanetsController extends Controller
         $responseJson = $client->request('GET', $url)->getBody();
         $responseObj = json_decode($responseJson);
         $planet = $responseObj;
+        $user_id = Auth::user()->id;
 
 
 
-        return view('admin.planets.show',compact('planet'));
+        return view('admin.planets.show',compact('planet','user_id'));
     }
 
     /**

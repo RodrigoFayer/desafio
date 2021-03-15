@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PlanetRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class PlanetRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:planets',
+            'name' => [
+                'required',
+                Rule::unique('planets')
+                    ->where('user_id', $this->user_id)
+
+            ],
             'rotation_period' => 'required',
             'orbital_period' => 'required',
             'diameter' => 'required',
@@ -33,7 +39,12 @@ class PlanetRequest extends FormRequest
             'terrain' => 'required',
             'surface_water' => 'required',
             'population' => 'required',
-            'url' => 'required|unique:planets',
+            'url' => [
+                'required',
+                Rule::unique('planets')
+                    ->where('user_id', $this->user_id)
+
+            ],
         ];
     }
     public function attributes()

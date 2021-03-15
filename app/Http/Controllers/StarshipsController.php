@@ -7,6 +7,8 @@ use App\Films;
 use App\People;
 use GuzzleHttp\Client;
 use App\Http\Requests\StarshipRequest;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 
 
@@ -84,7 +86,8 @@ class StarshipsController extends Controller
         $responseJson = $client->request('GET', $url)->getBody();
         $responseObj = json_decode($responseJson);
         $starship = $responseObj;
-        return view('admin.starships.show', compact('starship'));
+        $user_id = Auth::user()->id;
+        return view('admin.starships.show', compact('starship','user_id'));
     }
 
     /**

@@ -25,6 +25,9 @@ class CreatePlanetsTable extends Migration
             $table->string('surface_water');
             $table->string('population');
             $table->string('url');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
